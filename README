@@ -1,13 +1,22 @@
 TimestampedBoolean
 ==================
 
-Introduction goes here.
+For an AR object called Job with a published_at field, call:
 
+timestamped_boolean :published_at
 
-Example
-=======
+This will create the methods published and published? which return true if the timestamp is not nil
 
-Example goes here.
+Object.published will return a chainable has_finder which does what you would expect...
 
+Finally, 
+-publish sets the timestamp
+-publish! also saves the record
 
-Copyright (c) 2008 [name of plugin creator], released under the MIT license
+For a field like created_at, you can specify the timestamp verb:
+
+timestamped_boolean :created_at, :create
+
+which will give you create and create! instead of created and created!
+
+Copyright (c) 2008 Daniel Haran, released under the MIT license

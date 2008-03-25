@@ -13,6 +13,8 @@ module TimestampedBoolean
       end
       alias_method (bool + '?').to_sym, bool.to_sym
       
+      has_finder bool, :conditions => "#{field_name} IS NOT NULL"
+      
       define_method(action.to_sym) do
         send((field_name.to_s + '=').to_sym, Time.now)
       end
