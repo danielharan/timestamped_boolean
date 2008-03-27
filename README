@@ -12,6 +12,7 @@ Object.published will return a chainable has_finder which does what you would ex
 Finally, 
 -publish sets the timestamp
 -publish! also saves the record
+-published = sets a timestamp or nil for true and false, respectively
 
 For a field like created_at, you can specify the timestamp verb:
 
