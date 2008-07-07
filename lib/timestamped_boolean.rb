@@ -5,8 +5,9 @@ module TimestampedBoolean
   
   module ClassMethods
     def timestamped_boolean(field_name, verb_name=nil)
-      bool   = field_name.to_s.sub(/_at$/, '')
-      action = verb_name ? verb_name.to_s : bool.sub(/ed$/, '')
+      bool        = field_name.to_s.sub(/_at$/, '')
+      action      = verb_name ? verb_name.to_s : bool.sub(/ed$/, '')
+      undo_action = "un#{action}"
       
       define_method(bool.to_sym) do 
         ! send(field_name.to_sym).nil?
@@ -25,6 +26,15 @@ module TimestampedBoolean
       
       define_method (action + '!').to_sym do
         send action.to_sym
+        send :save!
+      end
+      
+      define_method(undo_action) do
+        send(field_name.to_s + '=', nil)
+      end
+      
+      define_method(undo_action+'!') do
+        send(undo_action)
         send :save!
       end
     end
