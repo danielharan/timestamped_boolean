@@ -17,7 +17,7 @@ module TimestampedBoolean
         send((field_name.to_s + '=').to_sym, (new_val ? Time.now : nil))
       end
       
-      has_finder bool, :conditions => "#{field_name} IS NOT NULL"
+      named_scope bool, :conditions => "#{field_name} IS NOT NULL"
       
       define_method(action.to_sym) do
         send((field_name.to_s + '=').to_sym, Time.now)
